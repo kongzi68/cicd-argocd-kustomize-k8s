@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+labels:
+  - pairs:
+      app-name: jenkins-master
+      managed-by: colin
+      created-by: colin
+      version: latest
+
+replicas:
+- name: jenkins-master
+  count: 1
+
+resources:
+  - deployment.yaml
+  - persistentvolumeclaim.yaml
+  - rbac.yaml
+  - secret.yaml
+  - service.yaml

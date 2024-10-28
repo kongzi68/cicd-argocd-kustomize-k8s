@@ -1,0 +1,12 @@
+apiVersion: builtin
+kind: PrefixSuffixTransformer
+metadata:
+  name: name-suffix-transformer
+suffix: -dev
+fieldSpecs:
+  - path: metadata/name
+    kind: Deployment
+  - path: metadata/name
+    kind: Service
+  - path: metadata/name
+    kind: PersistentVolumeClaim

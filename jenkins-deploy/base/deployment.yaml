@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins-master
+  labels:
+    name: jenkins-master
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: jenkins-master
+  template:
+    metadata:
+      name: jenkins-master
+      labels:
+        name: jenkins-master
+    spec:
+      serviceAccountName: jenkins
+      containers:
+        - name: jenkins-master
+          image: jenkins
+          ports:
+            - containerPort: 8080
+            - containerPort: 50000
+          resources:
+            limits:
+              cpu: 2
+              memory: 4Gi
+            requests:
+              cpu: 500m
+              memory: 1Gi
+          env:
+            - name: LIMITS_MEMORY
+              valueFrom:
+                resourceFieldRef:
+                  resource: limits.memory
+                  divisor: 1Mi
+            - name: JAVA_OPTS
+              value: -Xmx$(LIMITS_MEMORY)m -XshowSettings:vm -Dhudson.slaves.NodeProvisioner.initialDelay=0 -Dhudson.slaves.NodeProvisioner.MARGIN=50 -Dhudson.slaves.NodeProvisioner.MARGIN0=0.85
+          volumeMounts:
+            - name: jenkins-home
+              mountPath: /var/jenkins_home
+            - name: jenkins-war-dir
+              ## 这里先临时挂载到这个目录，通过手动复制一个当前镜像的war包到这里
+              #+ 然后再修改挂载路径为：/usr/share/jenkins，这样Jenkins就可以正常启动了
+              # mountPath: /usr/share/jenkins_temp
+              mountPath: /usr/share/jenkins
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 0
+      volumes:
+      - name: jenkins-home
+        persistentVolumeClaim:
+          claimName: jenkins-master-workspace
+      - name: jenkins-war-dir
+        persistentVolumeClaim:
+          claimName: jenkins-war 
+

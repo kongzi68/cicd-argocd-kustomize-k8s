@@ -1,0 +1,13 @@
+[worker.oci]
+  enabled = false
+
+[worker.containerd]
+  enabled = true
+  # namespace should be "k8s.io" for Kubernetes (including Rancher Desktop)
+  namespace = "default"
+
+[registry."192.168.189.199:11180"]
+  http = true
+
+[registry."harbor.mydomain.com"]
+  http = true

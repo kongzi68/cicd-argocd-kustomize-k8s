@@ -1,0 +1,6 @@
+debug          = false
+debug_full     = false
+address        = "unix:///run/containerd/containerd.sock"
+namespace      = "default"
+cgroup_manager = "systemd"
+insecure_registry = true

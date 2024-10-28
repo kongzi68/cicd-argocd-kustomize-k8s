@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hx-chat-action-server-out
+spec:
+  type: NodePort
+  ports:
+    - port: 5055
+      targetPort: 5055
+      protocol: TCP
+      name: port5055
+  selector:
+    app-name: hx-chat-action-server
+
+
+
+
+
+

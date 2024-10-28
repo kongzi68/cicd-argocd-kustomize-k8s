@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+labels:
+  - pairs:
+      app-name: hx-chat-action-server
+      managed-by: colin
+      created-by: colin
+      version: latest
+
+replicas:
+- name: hx-chat-action-server
+  count: 1
+
+resources:
+  - deployment.yaml
+  - persistentvolumeclaim.yaml
+  - secret.yaml
+  - service.yaml
+
+configMapGenerator:
+- name: hx-chat-action-server-configmap
+  envs:
+  - envs

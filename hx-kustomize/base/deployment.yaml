@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hx-chat-action-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-name: hx-chat-action-server
+  template:
+    metadata:
+      labels:
+        app-name: hx-chat-action-server
+    spec:
+      imagePullSecrets:
+        - name: hx-harbor-office
+      securityContext:
+        {}
+      containers:
+        - name: hx-chat-action-server
+          securityContext:
+            {}
+          image: hx-chat-action-server
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/sh
+            - -c
+            - ls -lha; python -m endpoint
+          ports:
+            - name: port5055
+              containerPort: 5055
+              protocol: TCP
+          envFrom:
+          - configMapRef:
+              name: hx-chat-action-server-configmap
+          resources: 
+            limits: 
+              cpu: "4"
+              memory: "8192Mi"
+            requests:
+              cpu: "1"
+              memory: "2048Mi"
+          volumeMounts:
+            - name: data
+              mountPath: /opt/betachat/data
+      dnsPolicy: ClusterFirst
+      dnsConfig:
+        nameservers:
+        - 223.5.5.5
+        - 114.114.114.114
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: hx-chat-action-server-data-pvc
