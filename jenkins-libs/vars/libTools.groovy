@@ -258,8 +258,8 @@ def getServerWorkloadTypeByHelm(namespaces, deploySVCName) {
 
 def splitImage(imageName) {
     /*
-        比如镜像为：192.168.189.199:11180/libs/elasticsearch/elasticsearch:7.17.3
-        拆分为：[192.168.189.199:11180, libs, libs/elasticsearch/elasticsearch, elasticsearch%252Felasticsearch, elasticsearch, 7.17.3]
+        比如镜像为：192.168.31.199:11180/libs/elasticsearch/elasticsearch:7.17.3
+        拆分为：[192.168.31.199:11180, libs, libs/elasticsearch/elasticsearch, elasticsearch%252Felasticsearch, elasticsearch, 7.17.3]
     */
     retList = []
     if (imageName != '') {

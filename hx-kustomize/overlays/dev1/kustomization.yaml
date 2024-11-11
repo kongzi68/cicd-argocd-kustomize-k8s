@@ -15,7 +15,7 @@ replicas:
 
 images:
 - name: hx-chat-action-server
-  newName: 192.168.189.199:11180/bf-test/hx-chat-action-server
+  newName: 192.168.31.199:11180/bf-test/hx-chat-action-server
   newTag: 1a20e08-89
 
 resources:

@@ -9,5 +9,5 @@ docker run --rm \
     --dest-authfile /root/.docker/config.json \
     --src-authfile /root/.docker/config.json \
     docker://fb-harbor.betack.com:8765/libs/python:bf-v3.10.14-bookworm \
-    docker://192.168.189.199:11180/libs/python:bf-v3.10.14-bookworm
+    docker://192.168.31.199:11180/libs/python:bf-v3.10.14-bookworm
 ```

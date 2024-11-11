@@ -4,12 +4,12 @@
 // @Library('ck-shared-library@dev') _
 
 // 公共
-def office_registry = "192.168.189.199:11180"
+def office_registry = "192.168.31.199:11180"
 def prod_registry = "harbor.mydomain.com"
 
 // 项目，ckChat
 def project = "ck-chats"  // HARBAR镜像仓库中的项目名称
-def git_address = "ssh://git@192.168.189.199:50022/beyond/chat_action_server.git"
+def git_address = "ssh://git@192.168.31.199:50022/beyond/chat_action_server.git"
 
 def imageDict = [:]
 
@@ -235,7 +235,7 @@ pipeline {
           echo '正在从gitlab拉取项目的kustomization代码...'
           sh '[ -d temp_jenkins_workspace ] || mkdir temp_jenkins_workspace'
           dir("${env.WORKSPACE}/temp_jenkins_workspace") {
-            gitCheckout('ssh://git@192.168.189.199:50022/argocd/hx-kustomize.git', 'main')
+            gitCheckout('ssh://git@192.168.31.199:50022/argocd/hx-kustomize.git', 'main')
             sh 'pwd; ls -lh'
             // 循环处理需要部署的服务
             for (deploy_svc_name in params.DEPLOY_SVC_NAME.tokenize(',')) {

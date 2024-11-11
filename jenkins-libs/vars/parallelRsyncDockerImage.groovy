@@ -9,7 +9,7 @@ def call(Map config = [:]) {
     */
     def String username = 'devops'
     def String password = 'iampassword'
-    def String officeRegistry = '192.168.189.199:11180'
+    def String officeRegistry = '192.168.31.199:11180'
     def String extUsername = 'devops'
     def String extPasswrod = 'iampassword'
     def String prodRegistry = 'iamIPaddr'

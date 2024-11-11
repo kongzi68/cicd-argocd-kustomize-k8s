@@ -9,7 +9,7 @@ def call(Map config = [:]) {
         config.dockerFile
     */
     def String harborAuth = 'd1de0610-67b2-43ce-8ad9-09ca666cb877'
-    def String officeRegistry = '192.168.189.199:11180'
+    def String officeRegistry = '192.168.31.199:11180'
     def String prodRegistry = 'harbor.betack.com'
     def Map imageDict = [:]
 

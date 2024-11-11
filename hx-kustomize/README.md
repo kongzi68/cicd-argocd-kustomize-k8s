@@ -15,14 +15,14 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin http://192.168.189.199:50080/argocd/hx-kustomize.git
+git remote add origin http://192.168.31.199:50080/argocd/hx-kustomize.git
 git branch -M main
 git push -uf origin main
 ```
 
 ## Integrate with your tools
 
-- [ ] [Set up project integrations](http://192.168.189.199:50080/argocd/hx-kustomize/-/settings/integrations)
+- [ ] [Set up project integrations](http://192.168.31.199:50080/argocd/hx-kustomize/-/settings/integrations)
 
 ## Collaborate with your team
 
