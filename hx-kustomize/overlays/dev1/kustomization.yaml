@@ -1,34 +1,25 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
-namespace: argo-dev-1
-
+namespace: hx-dev-1
 labels:
-  - pairs:
-      create-time: 2024-10-21
-      owner: colin
-      version: 20241021-v0.0.1
-
+- pairs:
+    owner: colin
+    version: 20241021-v0.0.1
 replicas:
 - name: hx-chat-action-server
-  count: 3
-
+  count: 1
 images:
 - name: hx-chat-action-server
-  newName: 192.168.31.199:11180/bf-test/hx-chat-action-server
-  newTag: 1a20e08-89
-
+  newName: 192.168.31.199:11180/ck-chats/beta-chat-action-server
+  newTag: 619dead-78
 resources:
-  - ../../base
-
+- ../../base
 configMapGenerator:
-  - name: hx-chat-action-server-configmap
-    behavior: merge
-    literals:
-      - RUST_LOG=DEBUG
-
+- name: hx-chat-action-server-configmap
+  behavior: merge
+  literals:
+  - RUST_LOG=DEBUG
 patches:
-  - path: change-pvc.patch.yaml
-
+- path: change-pvc.patch.yaml
 transformers:
 - ./kustomizeconfig/namesuffix-transformer.yaml
