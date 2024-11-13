@@ -1,0 +1,25 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: hx-staging-1
+labels:
+- pairs:
+    owner: colin
+    version: 20241021-v0.0.1
+replicas:
+- name: hx-chat-action-server
+  count: 1
+images:
+- name: hx-chat-action-server
+  newName: nginx
+  newTag: 1.27.2
+resources:
+- ../../base
+configMapGenerator:
+- name: hx-chat-action-server-configmap
+  behavior: merge
+  literals:
+  - RUST_LOG=DEBUG
+patches:
+- path: change-pvc.patch.yaml
+transformers:
+- ./kustomizeconfig/namesuffix-transformer.yaml

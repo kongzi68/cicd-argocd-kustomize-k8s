@@ -11,3 +11,7 @@
 3. jenkins-libs，Jenkins共享库
 4. jenkins-pipeline，pipeline流水线，实现从代码编译 → 打包镜像 → 修改kustomize → 提交kustomize到gitlab仓库
 
+代码仓库：
+
+![](../images/Snipaste_2024-11-13_17-17-10.jpg)
+![](../images/Snipaste_2024-11-13_17-18-20.jpg)

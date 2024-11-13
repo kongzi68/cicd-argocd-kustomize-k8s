@@ -18,7 +18,7 @@ spec:
   # Only permit applications to deploy to the guestbook namespace in the same cluster
   # Destination clusters can be identified by 'server', 'name', or both.
   destinations:
-  - namespace: hx-dev-1
+  - namespace: '*'
     ## 默认的k8s集群，argocd所在的k8s集群，其名称就是：in-cluster
     #+ 可以通过argocd CLI添加k8s集群
     server: https://kubernetes.default.svc

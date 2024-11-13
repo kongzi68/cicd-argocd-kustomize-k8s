@@ -249,11 +249,12 @@ pipeline {
                 configEnvPrefix = configEnv[0]
                 configEnvSuffix = configEnv[1]
                 configENV = configEnv[2]
-                println("CONFIG_ENV：" + configEnvSuffix)
-                println("项目简称，用于命名空间的前缀：" + configEnvPrefix)
+                println("CONFIG_ENV，configEnvSuffix：" + configEnvSuffix)
+                println("项目简称，用于命名空间的前缀，configEnvPrefix：" + configEnvPrefix)
+                println("configENV：" + configENV)
                 switch(configENV) {
-                  case 'staging':
-                    kustomizationYaml = "overlays/staging/kustomization.yaml"
+                  case 'staging1':
+                    kustomizationYaml = "overlays/staging1/kustomization.yaml"
                   break
                   /* 生产环境根据各自发版流程决定是否在这里处理
                   case 'prod':

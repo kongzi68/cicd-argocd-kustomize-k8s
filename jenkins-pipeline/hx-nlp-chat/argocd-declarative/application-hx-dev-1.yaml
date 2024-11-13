@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 # https://argo-cd.readthedocs.io/en/stable/user-guide/application-specification/
 metadata:
-  name: hx-chat-action-server
+  name: hx-chat-action-server-dev-1
   # You'll usually want to add your resources to the argocd namespace.
   #+ 这里配置为：hx-dev-1，放到服务所部署的命名空间下，相应的kind: AppProject中，需要进行匹配修改
   namespace: hx-dev-1
@@ -14,7 +14,7 @@ metadata:
     # - resources-finalizer.argocd.argoproj.io/background
   # Add labels to your application object.
   labels:
-    name: hx-chat-action-server
+    name: hx-chat-action-server-dev-1
 spec:
   # The project the application belongs to.
   project: hx-chat-project
