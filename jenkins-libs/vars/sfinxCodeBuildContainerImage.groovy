@@ -22,8 +22,8 @@ def call(Map config = [:]) {
                 LABEL maintainer="colin" version="1.0" datetime="2024-07-18"
                 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
                     echo "Asia/Shanghai" > /etc/timezone
-                COPY ${config.tempJarName} /opt/betack/${config.deployJarPKGName}
-                WORKDIR /opt/betack
+                COPY ${config.tempJarName} /opt/betalpha/${config.deployJarPKGName}
+                WORKDIR /opt/betalpha
             """.stripIndent()
             println("使用Jenkins共享库中的dockerfile")
         } else {

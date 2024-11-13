@@ -16,8 +16,8 @@ def call(Map config = [:]) {
         dockerFile = """
             FROM ${office_registry}/libs/python:bf-v3.10.14-bookworm
             LABEL maintainer="colin" version="1.0" datetime="2024-07-18"
-            ADD *.whl /opt/betack/
-            WORKDIR /opt/betack/
+            ADD *.whl /opt/betalpha/
+            WORKDIR /opt/betalpha/
             RUN pip install *.whl
         """.stripIndent()
         println("使用Jenkins共享库中的dockerfile")

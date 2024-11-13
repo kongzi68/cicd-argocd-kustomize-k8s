@@ -74,7 +74,7 @@ def jmxRemoveDuplicateA(str_command){
         -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false \
         -Dcom.sun.management.jmxremote.local.only=false
     """
-    akka_config = "-Dconfig.file=/opt/betack/akka-config.conf"
+    akka_config = "-Dconfig.file=/opt/betalpha/akka-config.conf"
     // 去除多余的空格
     jmx_option = strRemoveDuplicate(jmx_option)
     // println("jmx_option：" + jmx_option)

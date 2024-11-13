@@ -19,12 +19,12 @@ def call(Map config = [:]) {
         if (config.containsKey("dockerFile") == false) {
             echo "创建Dockerfile"
             dockerFile = """
-                FROM ${office_registry}/betack/betack-nlp-data-sync-baseimage:ubuntu-22.04
+                FROM ${office_registry}/barbeyond/betalpha-nlp-data-sync-baseimage:ubuntu-22.04
                 LABEL maintainer="colin" version="1.0" datetime="2024-07-18"
                 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
                     echo "Asia/Shanghai" > /etc/timezone
-                WORKDIR /opt/betack
-                COPY ${config.brinSVCName} /opt/betack/${config.brinSVCName}
+                WORKDIR /opt/betalpha
+                COPY ${config.brinSVCName} /opt/betalpha/${config.brinSVCName}
             """.stripIndent()
             println("使用Jenkins共享库中的dockerfile")
         } else {

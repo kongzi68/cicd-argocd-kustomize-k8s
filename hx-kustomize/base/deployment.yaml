@@ -22,10 +22,11 @@ spec:
             {}
           image: hx-chat-action-server
           imagePullPolicy: IfNotPresent
-          command:
-            - /bin/sh
-            - -c
-            - ls -lha; python -m endpoint
+          # 调试注释
+          # command:
+          #   - /bin/sh
+          #   - -c
+          #   - ls -lha; python -m endpoint
           ports:
             - name: port5055
               containerPort: 5055
