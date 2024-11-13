@@ -12,7 +12,7 @@ def call(Map config = [:]) {
     def String harborAuth = 'd1de0610-67b2-43ce-8ad9-09ca666cb877'
     // 设置容器镜像仓库默认值
     if(!config.containsKey("imageSRCHarbor")){
-        config.put("imageSRCHarbor","192.168.31.199:11180")
+        config.put("imageSRCHarbor","iamIPaddr:11180")
     }
     if(!config.containsKey("imageDSTHarbor")){
         config.put("imageDSTHarbor","harbor.betack.com")

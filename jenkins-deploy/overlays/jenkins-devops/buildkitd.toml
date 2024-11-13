@@ -6,7 +6,7 @@
   # namespace should be "k8s.io" for Kubernetes (including Rancher Desktop)
   namespace = "default"
 
-[registry."192.168.31.199:11180"]
+[registry."iamIPaddr:11180"]
   http = true
   insecure = true
 

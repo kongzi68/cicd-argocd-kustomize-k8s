@@ -21,7 +21,7 @@ spec:
 
   # Source of the application manifests
   source:
-    repoURL: ssh://git@192.168.31.199:50022/argocd/hx-kustomize.git  # Can point to either a Helm chart repo or a git repo.
+    repoURL: ssh://git@iamIPaddr:50022/argocd/hx-kustomize.git  # Can point to either a Helm chart repo or a git repo.
     targetRevision: main  # For Helm, this refers to the chart version.
     path: overlays/dev1  # This has no meaning for Helm charts pulled directly from a Helm repo instead of git.
 

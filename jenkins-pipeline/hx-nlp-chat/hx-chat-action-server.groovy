@@ -4,12 +4,12 @@
 // @Library('ck-shared-library@dev') _
 
 // 公共
-def office_registry = "192.168.31.199:11180"
-def prod_registry = "139.224.134.35:9999"
+def office_registry = "iamIPaddr:11180"
+def prod_registry = "harbor.mydomain.com"
 
 // 项目，ckChat
 def project = "ck-chats"  // HARBAR镜像仓库中的项目名称
-def git_address = "ssh://git@192.168.31.199:50022/beyond/chat_action_server.git"
+def git_address = "ssh://git@iamIPaddr:50022/beyond/chat_action_server.git"
 
 def imageDict = [:]
 
@@ -78,8 +78,8 @@ pipeline {
                 mountPath: /var/lib/containerd
           dnsConfig:
             nameservers:
-            - 223.5.5.5
-            - 114.114.114.114
+            - iamIPaddr
+            - iamIPaddr
           imagePullSecrets:
           - name: harbor-aliyun
           - name: harbor-inner
@@ -125,7 +125,7 @@ pipeline {
                  tagFilter: '*',
                  type: 'PT_BRANCH',
                  useRepository: "${git_address}"
-    choice choices: ['beta-chat-action-server'],
+    choice choices: ['server-name-python-rust'],
            description: '请选择本次发版需要部署的服务',
            name: 'DEPLOY_SVC_NAME'
     choice choices: ['hx-dev-1','hx-staging-1'],
@@ -171,7 +171,7 @@ pipeline {
                 export CARGO_NET_GIT_FETCH_WITH_CLI=true
                 cargo --version
                 uv --version
-                echo 'https://${USERPASS}@code.betalpha.com' > ${WORKSPACE}/git-credentials
+                echo 'https://${USERPASS}@code.betack.com' > ${WORKSPACE}/git-credentials
                 git config --global credential.helper 'store --file ${WORKSPACE}/git-credentials'
                 git config --global credential.helper
                 export UV_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple
@@ -202,23 +202,23 @@ pipeline {
                   FROM ${office_registry}/libs/python:bf-v3.10.14-bookworm
                   LABEL maintainer="colin" version="1.0" datetime="2024-07-17"
                   COPY .venv/lib/python3.10/site-packages /usr/local/lib/python3.10/site-packages
-                  COPY src /opt/betalpha/app
-                  WORKDIR /opt/betalpha/app
+                  COPY src /opt/betack/app
+                  WORKDIR /opt/betack/app
                   CMD ["python", "endpoint/__main__.py"]
                 """.stripIndent()
               } else {
                 dockerFile = """
-                  #FROM ${office_registry}/ck-chats/beta-chat-action-server:latest
-                  FROM ${office_registry}/ck-chats/beta-chat-action-server1:bd7f744-900
+                  #FROM ${office_registry}/ck-chats/server-name-python-rust:latest
+                  FROM ${office_registry}/ck-chats/server-name-python-rust1:bd7f744-900
                   LABEL maintainer="colin" version="1.0" datetime="2024-07-17"
-                  COPY src /opt/betalpha/app
-                  WORKDIR /opt/betalpha/app
+                  COPY src /opt/betack/app
+                  WORKDIR /opt/betack/app
                   CMD ["python", "endpoint/__main__.py"]
                 """.stripIndent()
               }
-              // ${office_registry}/barbeyond/beta-chat-baseimage:v-python3.10.14
+              // ${office_registry}/betack/beta-chat-baseimage:v-python3.10.14
               // FROM ${office_registry}/libs/python:bf-v3.10.14-bookworm
-              // FROM ${office_registry}/barbeyond/beta-chat-action-server1:latest
+              // FROM ${office_registry}/betack/server-name-python-rust1:latest
               imageDict = pythonCodeBuildContainerImageByUv(dockerFile: dockerFile,
                                                             project: project,
                                                             deploySVCName: params.DEPLOY_SVC_NAME)
@@ -239,7 +239,7 @@ pipeline {
           echo '正在从gitlab拉取项目的kustomization代码...'
           sh '[ -d temp_jenkins_workspace ] || mkdir temp_jenkins_workspace'
           dir("${env.WORKSPACE}/temp_jenkins_workspace") {
-            gitCheckout('ssh://git@192.168.31.199:50022/argocd/hx-kustomize.git', 'main')
+            gitCheckout('ssh://git@iamIPaddr:50022/argocd/hx-kustomize.git', 'main')
             sh 'pwd; ls -lh'
             // 循环处理需要部署的服务
             for (deploy_svc_name in params.DEPLOY_SVC_NAME.tokenize(',')) {

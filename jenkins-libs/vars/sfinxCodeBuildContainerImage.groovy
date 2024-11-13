@@ -9,7 +9,7 @@ def call(Map config = [:]) {
         config.dockerFile
     */
     def String harborAuth = 'd1de0610-67b2-43ce-8ad9-09ca666cb877'
-    def String officeRegistry = '192.168.31.199:11180'
+    def String officeRegistry = 'iamIPaddr:11180'
     def String prodRegistry = 'harbor.betack.com'
     def Map imageDict = [:]
 
@@ -22,8 +22,8 @@ def call(Map config = [:]) {
                 LABEL maintainer="colin" version="1.0" datetime="2024-07-18"
                 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
                     echo "Asia/Shanghai" > /etc/timezone
-                COPY ${config.tempJarName} /opt/betalpha/${config.deployJarPKGName}
-                WORKDIR /opt/betalpha
+                COPY ${config.tempJarName} /opt/betack/${config.deployJarPKGName}
+                WORKDIR /opt/betack
             """.stripIndent()
             println("使用Jenkins共享库中的dockerfile")
         } else {

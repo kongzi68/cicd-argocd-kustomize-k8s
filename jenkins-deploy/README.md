@@ -10,9 +10,9 @@ Name:               argocd/jenkins-master
 Project:            devops
 Server:             https://kubernetes.default.svc
 Namespace:          jenkins-devops
-URL:                https://192.168.31.200:31642/applications/jenkins-master
+URL:                https://iamIPaddr:31642/applications/jenkins-master
 Source:
-- Repo:             ssh://git@192.168.31.199:50022/argocd/jenkins-deploy.git
+- Repo:             ssh://git@iamIPaddr:50022/argocd/jenkins-deploy.git
   Target:           main
   Path:             overlays/jenkins-devops
 SyncWindow:         Sync Allowed

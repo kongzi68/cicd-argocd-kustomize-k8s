@@ -6,7 +6,7 @@ def call(Map config = [:]) {
         config.dockerFile
     */
     def String harborAuth = 'd1de0610-67b2-43ce-8ad9-09ca666cb877'
-    def String officeRegistry = '192.168.31.199:11180'
+    def String officeRegistry = 'iamIPaddr:11180'
     def String prodRegistry = 'harbor.betack.com'
     def Map imageDict = [:]
     // 创建构建docker镜像用的临时目录
@@ -19,12 +19,12 @@ def call(Map config = [:]) {
         if (config.containsKey("dockerFile") == false) {
             echo "创建Dockerfile"
             dockerFile = """
-                FROM ${office_registry}/barbeyond/betalpha-nlp-data-sync-baseimage:ubuntu-22.04
+                FROM ${office_registry}/betack/betack-nlp-data-sync-baseimage:ubuntu-22.04
                 LABEL maintainer="colin" version="1.0" datetime="2024-07-18"
                 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
                     echo "Asia/Shanghai" > /etc/timezone
-                WORKDIR /opt/betalpha
-                COPY ${config.brinSVCName} /opt/betalpha/${config.brinSVCName}
+                WORKDIR /opt/betack
+                COPY ${config.brinSVCName} /opt/betack/${config.brinSVCName}
             """.stripIndent()
             println("使用Jenkins共享库中的dockerfile")
         } else {

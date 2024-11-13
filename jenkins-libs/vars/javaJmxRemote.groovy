@@ -8,21 +8,21 @@ def call(Map config = [:]) {
     switch(config.k8s) {
         case 'shanghai':
             // shanghai prod kubeadm k8s
-            k8sNodeIP = '172.31.40.99'
+            k8sNodeIP = 'iamIPaddr'
             k8sAuth = 'fccafb7c-8128-4a91-87b2-3b7cb6940343'
             randomDivisor = 30000  // 取值范围 30000-32767
             randomMinNUM = 30000
         break
         case 'rke2k8s':
             // rke2 k8s
-            k8sNodeIP = '192.168.0.182'
+            k8sNodeIP = 'iamIPaddr'
             k8sAuth = 'gd4efaf3-23f9-4f31-aaaa-3e3baa9618d4'
             randomDivisor = 30000   // 取值范围 30000~59999
             randomMinNUM = 30000
         break
         case 'cdk8s':
             // 成都office kubeadm k8s
-            k8sNodeIP = '172.16.60.202'
+            k8sNodeIP = 'iamIPaddr'
             k8sAuth = 'fd4efaf3-23f9-4f31-a085-3e3baa9618d4'
             randomDivisor = 30000   // 取值范围 30000-32767
             randomMinNUM = 30000

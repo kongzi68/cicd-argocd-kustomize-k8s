@@ -15,10 +15,10 @@ def call(Map config = [:]) {
         // 特例处理
         switch(config.deploySVCName) {
             case ['saas-data-server']:
-                javaPKGPath = "/opt/betalpha/data-etl-server.jar"
+                javaPKGPath = "/opt/betack/data-etl-server.jar"
             break
             default:
-                javaPKGPath = "/opt/betalpha/${config.deploySVCName}.jar"
+                javaPKGPath = "/opt/betack/${config.deploySVCName}.jar"
             break
         }
         javaCommand = sh (script: """

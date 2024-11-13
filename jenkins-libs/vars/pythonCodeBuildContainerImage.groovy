@@ -6,7 +6,7 @@ def call(Map config = [:]) {
         config.dockerFile
     */
     def String harborAuth = 'd1de0610-67b2-43ce-8ad9-09ca666cb877'
-    def String officeRegistry = '192.168.31.199:11180'
+    def String officeRegistry = 'iamIPaddr:11180'
     def String prodRegistry = 'harbor.betack.com'
     def Map imageDict = [:]
     // 创建构建docker镜像用的临时目录
@@ -21,8 +21,8 @@ def call(Map config = [:]) {
             dockerFile = """
                 FROM ${office_registry}/libs/python:bf-v3.10.14-bookworm
                 LABEL maintainer="colin" version="1.0" datetime="2024-07-18"
-                ADD *.whl /opt/betalpha/
-                WORKDIR /opt/betalpha/
+                ADD *.whl /opt/betack/
+                WORKDIR /opt/betack/
                 RUN pip install *.whl
             """.stripIndent()
             println("使用Jenkins共享库中的dockerfile")

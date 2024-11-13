@@ -47,8 +47,8 @@ spec:
       dnsPolicy: ClusterFirst
       dnsConfig:
         nameservers:
-        - 223.5.5.5
-        - 114.114.114.114
+        - iamIPaddr
+        - iamIPaddr
       volumes:
         - name: data
           persistentVolumeClaim:

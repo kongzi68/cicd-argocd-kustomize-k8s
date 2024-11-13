@@ -14,7 +14,7 @@ def call(Map config = [:]) {
     """
     // 使用 Jenkins 凭据进行推送
     withCredentials([usernamePassword(credentialsId: '3d040389-9dfe-4c0d-9dab-9f6487f10409', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
-        GIT_URL="http://${GIT_USERNAME}:${GIT_PASSWORD}@192.168.31.199:50080/${config.projectHTTPAddr}"
+        GIT_URL="http://${GIT_USERNAME}:${GIT_PASSWORD}@iamIPaddr:50080/${config.projectHTTPAddr}"
     }
     // 推送更改到远程仓库
     sh """#!/bin/bash

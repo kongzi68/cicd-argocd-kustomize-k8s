@@ -9,10 +9,10 @@ def call(Map config = [:]) {
     */
     def String username = 'devops'
     def String password = 'iampassword'
-    def String officeRegistry = '192.168.31.199:11180'
+    def String officeRegistry = 'iamIPaddr:11180'
     def String extUsername = 'devops'
     def String extPasswrod = 'iampassword'
-    def String prodRegistry = '172.30.10.88'
+    def String prodRegistry = 'iamIPaddr'
     imageName = "${officeRegistry}/${config.project}/${config.deploySVCName}:${config.imageTag}"
     extranetImageName = "${prodRegistry}/${config.project}/${config.deploySVCName}:${config.imageTag}"
     tempImagePkgName = "${config.deploySVCName}-${config.imageTag}.tar"
@@ -41,8 +41,8 @@ def call(Map config = [:]) {
                     echo "开始切割镜像文件为多个小文件"
                     split -a 5 -b 1m ${tempImagePkgName} '${tempImagePkgName}.'
                     rm -f ${tempImagePkgName}
-                    sshpass -p iampassword ssh -o StrictHostKeyChecking=no -p65000 root@121.255.255.255 '[ -d ${tempDir} ] || rm -rf ${tempDir};[ -d ${tempDir} ] || mkdir ${tempDir}'
-                    find . -type f -name "${tempImagePkgName}.*" | SHELL=/bin/sh parallel --linebuffer --jobs=${config.parallelJobs} 'sshpass -p iampassword rsync -e "ssh -p65000 -o StrictHostKeyChecking=no" -azP {} root@121.255.255.255:${tempDir}/' 
+                    sshpass -p iampassword ssh -o StrictHostKeyChecking=no -p65000 root@iamIPaddr '[ -d ${tempDir} ] || rm -rf ${tempDir};[ -d ${tempDir} ] || mkdir ${tempDir}'
+                    find . -type f -name "${tempImagePkgName}.*" | SHELL=/bin/sh parallel --linebuffer --jobs=${config.parallelJobs} 'sshpass -p iampassword rsync -e "ssh -p65000 -o StrictHostKeyChecking=no" -azP {} root@iamIPaddr:${tempDir}/' 
                 """
             } catch(Exception err) {
                 println(err.getMessage())
@@ -50,10 +50,10 @@ def call(Map config = [:]) {
             }
             sh """
                 echo "执行补充文件传输"
-                sshpass -p iampassword rsync -e "ssh -p65000 -o StrictHostKeyChecking=no" -azP "${env.WORKSPACE}/temp_docker_rsync_dir/" root@121.255.255.255:${tempDir}/
+                sshpass -p iampassword rsync -e "ssh -p65000 -o StrictHostKeyChecking=no" -azP "${env.WORKSPACE}/temp_docker_rsync_dir/" root@iamIPaddr:${tempDir}/
                 echo "传输文件完成，开始导入镜像"
-                sshpass -p iampassword ssh -o StrictHostKeyChecking=no -p65000 root@121.255.255.255 "cd ${tempDir} && cat ${tempImagePkgName}.* > ${tempImagePkgName};"
-                sshpass -p iampassword ssh -o StrictHostKeyChecking=no -p65000 root@121.255.255.255 "docker login -u ${extUsername} -p '${extPasswrod}' ${prodRegistry}; \
+                sshpass -p iampassword ssh -o StrictHostKeyChecking=no -p65000 root@iamIPaddr "cd ${tempDir} && cat ${tempImagePkgName}.* > ${tempImagePkgName};"
+                sshpass -p iampassword ssh -o StrictHostKeyChecking=no -p65000 root@iamIPaddr "docker login -u ${extUsername} -p '${extPasswrod}' ${prodRegistry}; \
                     ls -lh ${tempDir}/${tempImagePkgName}; \
                     docker image load -i ${tempDir}/${tempImagePkgName}; \
                     rm -rf ${tempDir}; \
