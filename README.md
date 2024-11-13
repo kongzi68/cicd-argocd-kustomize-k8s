@@ -13,5 +13,5 @@
 
 代码仓库：
 
-![](../images/Snipaste_2024-11-13_17-17-10.jpg)
-![](../images/Snipaste_2024-11-13_17-18-20.jpg)
+![](images/Snipaste_2024-11-13_17-17-10.jpg)
+![](images/Snipaste_2024-11-13_17-18-20.jpg)
